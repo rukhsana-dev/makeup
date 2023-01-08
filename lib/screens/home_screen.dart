@@ -1,7 +1,8 @@
 // ye maine makeup me se code write kiya h.
 // image color picker, but maine google search color image se nikala h color.
 // https://docs.flutter.dev/development/ui/widgets/basics
-// this docs eassy to me.
+// this docs eassy.
+
 import 'package:flutter/material.dart';
 
 import 'image_tile.dart';
@@ -12,24 +13,26 @@ const PRIMARY = "primary";
 const WHITE = "White";
 const RED = "red";
 const SECONDARY = "secondary";
+const Grey = "grey";
 
 const Map<String, Color> myColors = {
   PRIMARY: Color(0xffFE036A),
   WHITE: Colors.white,
   SECONDARY: Color(0xFFFF80AB),
+  Grey: Colors.grey,
   //RED: Colors.red , iski zarurat nhi.
 };
 
-class HomeScreen extends StatefulWidget {
+var priceTextStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+);
+
+class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
   });
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   // void dispose() {
   // jab screen band hota ha mtlb ke ye page sy haat ta ha to yaha pr kiss e chz ko stop krwana
@@ -52,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // _myAppBar ( _ this means was a private code ).
           _myAppBar(),
       backgroundColor: myColors[PRIMARY],
-      body: const _Body(),
+      body: _Body(),
     );
   }
 }
@@ -98,8 +101,6 @@ dynamic _myAppBar() {
 }
 
 class _Body extends StatelessWidget {
-  const _Body();
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -144,7 +145,8 @@ class _Body extends StatelessWidget {
                           height: constraints.maxHeight * .85,
                           imagePath: 'assets/images/makeup1.png',
                           addCallback: () => print("Main item added"),
-                          favoritecallback: () => print("Main item favorited"),
+                          favouritecallback: () =>
+                              print("Main item favourited"),
                           price: 15.00,
                         ),
                         Column(
@@ -153,8 +155,8 @@ class _Body extends StatelessWidget {
                               height: constraints.maxHeight * .37,
                               imagePath: 'assets/images/makeup2.png',
                               addCallback: () => print("2nd item added"),
-                              favoritecallback: () =>
-                                  print("2nd item favorited"),
+                              favouritecallback: () =>
+                                  print("2nd item favourited"),
                               price: 75.00,
                             ),
                             SizedBox(height: 8),
@@ -162,8 +164,8 @@ class _Body extends StatelessWidget {
                               height: constraints.maxHeight * .37,
                               imagePath: 'assets/images/makeup3.png',
                               addCallback: () => print("3rd item added"),
-                              favoritecallback: () =>
-                                  print("3rd item favorited"),
+                              favouritecallback: () =>
+                                  print("3rd item favourited"),
                               price: 55.00,
                             ),
                             SizedBox(height: 10),
@@ -179,20 +181,187 @@ class _Body extends StatelessWidget {
         ),
         Expanded(
             flex: 3,
-            child: Container(
-                // decoration: BoxDecoration(
-                // borderRadius:
-                // circle krta h border ko borderradius
-                // horizontal left side pura circle ho gya
-                // Radius Circular 100
-                // BorderRadius.horizontal(left: Radius.circular(100)),
-                //   border: Border(
-                //   bottom: BorderSide(color: Colors.black, width: 10)),
-                // aage ka
-                // color: myColors[PRIMARY]),
-                )),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      bottom: 12, top: 12, left: 40, right: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Recommended',
+                        style: TextStyle(
+                            color: myColors[WHITE],
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      InkWell(
+                        onTap: () => print("Recommended pressed"),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(18),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: myColors[PRIMARY],
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => Stack(
+                      children: [
+                        Positioned(
+                          right: 15,
+                          child: Container(
+                            height: constraints.maxHeight * 0.8,
+                            width: constraints.maxWidth * 0.8,
+                            decoration: BoxDecoration(
+                              color: myColors[WHITE],
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(70),
+                                topRight: Radius.circular(30),
+                                bottomRight: Radius.circular(30),
+                                bottomLeft: Radius.circular(30),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          right: 5,
+                          child: Container(
+                            height: constraints.maxHeight * 0.8,
+                            width: constraints.maxWidth * 0.84,
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: constraints.maxHeight * 0.8,
+                                  width: constraints.maxWidth * .24,
+                                  child: Image(
+                                    image:
+                                        AssetImage('assets/images/makeup4.png'),
+                                  ),
+                                ),
+                                SizedBox(width: 15),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: constraints.maxWidth * .40,
+                                      child: Text(
+                                        'Multi shades many options available',
+                                        style: TextStyle(
+                                          color: myColors[Grey],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 15),
+                                    Container(
+                                      child: Text(
+                                        '\$75.00',
+                                        style: priceTextStyle,
+                                      ),
+                                    ),
+                                    SizedBox(height: 10),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  children: [
+                                    SizedBox(height: 10),
+                                    FavoriteButton(
+                                      favoriteCallback: () => print(
+                                        "Recommended item favorited",
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    PlusButton(
+                                      addCallback: () =>
+                                          print("Recommeneded item added"),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )),
       ],
     );
   }
 }
-// 1:30 last time
+
+class PlusButton extends StatelessWidget {
+  const PlusButton({
+    Key? key,
+    required this.addCallback,
+  }) : super(key: key);
+
+  final Function addCallback;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => addCallback,
+      child: Container(
+        decoration: BoxDecoration(
+          color: myColors[SECONDARY],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(7),
+            topRight: Radius.circular(7),
+            bottomLeft: Radius.circular(7),
+            bottomRight: Radius.circular(15),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Icon(
+            Icons.add,
+            color: myColors[PRIMARY],
+            size: 15,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class FavoriteButton extends StatelessWidget {
+  const FavoriteButton({
+    Key? key,
+    required this.favoriteCallback,
+  }) : super(key: key);
+
+  final Function favoriteCallback;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () => favoriteCallback,
+      icon: Icon(
+        Icons.favorite_border,
+        color: myColors[PRIMARY],
+        size: 25,
+      ),
+    );
+  }
+}

@@ -5,12 +5,13 @@ import 'package:flutter/material.dart';
 class ImageTile extends StatelessWidget {
   final double height;
   final double price;
-  final Function favoritecallback;
+  final Function favouritecallback;
   final Function addCallback;
   final String imagePath;
+
   const ImageTile({
     required this.height,
-    required this.favoritecallback,
+    required this.favouritecallback,
     required this.addCallback,
     required this.price,
     required this.imagePath,
@@ -37,7 +38,7 @@ class ImageTile extends StatelessWidget {
                   child: IconButton(
                       onPressed:
                           // ye maine yuhi diya h just mujhe run krte hue print dikkhe.
-                          () => print('favoriteCallback'),
+                          () => print('favouriteCallback'),
                       icon: Icon(
                         // ye icon ka kam row ke ander hua h or ye favorite (heart icon h).
                         Icons.favorite_border,
